@@ -54,8 +54,8 @@ core_transforms = {'train': ClassificationPresetTrain(crop_size=input_size, vit=
                    'val': ClassificationPresetEval(crop_size=input_size, resize_size=256, vit=True)}
 
 
-cache_dir = '/ddnbig/a.cossu/vision'
-data_dir = '/ddnbig/a.cossu/data/'
+cache_dir = '/ddnbig/a.anonymuser/vision'
+data_dir = '/ddnbig/a.anonymuser/data/'
 
 os.makedirs(os.path.join(cache_dir, args.result_folder, 'joint'), exist_ok=True)
 n_exps = 5

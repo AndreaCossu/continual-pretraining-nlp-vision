@@ -56,3 +56,8 @@ list of tokens added to Roberta when its vocabulary is expanding. The list is sp
 All the custom Avalanche strategies (e.g., used to adapt Huggingface for Avalanche) are also defined there. 
 
 For iNaturalist, we provide the indices of the few patterns we removed because they did not match the default image format of the dataset.
+
+## Jupyter notebook
+We provide a Jupyter notebook to replicate our exploratory analysis of the NLP environment, including the analysis on the number of
+abstracts per class and the most frequent tokens present in the dataset with respect to Roberta tokenizer. 
+In particular, we used this last information to select which tokens to add to Roberta when its vocabulary was expanding. 

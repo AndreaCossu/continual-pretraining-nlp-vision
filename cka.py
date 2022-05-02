@@ -175,8 +175,8 @@ if __name__ == "__main__":
     model2_layers = model2layers[args.modelname] if not args.large else model2layers_large[args.modelname]
 
     device = torch.device("cuda") if torch.cuda.is_available() else "cpu"
-    cache_dir = f'/ddnbig/a.cossu/{task_type}'
-    data_dir = '/ddnbig/a.cossu/data/'
+    cache_dir = f'/ddnbig/a.anonymuser/{task_type}'
+    data_dir = '/ddnbig/a.anonymuser/data/'
     os.makedirs(os.path.join(cache_dir, args.result_folder), exist_ok=True)
     save_path = os.path.join(cache_dir, args.result_folder)
 
