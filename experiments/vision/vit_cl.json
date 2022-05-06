@@ -1,5 +1,5 @@
 {
-  "result_folder": "/ddnbig/a.cossu/vision/vit_cl",
+  "result_folder": "/ddnbig/a.anonymuser/vision/vit_cl",
   "modelname": "vit",
   "train_batch_size": 64,
   "eval_batch_size": 64,
@@ -12,5 +12,5 @@
   "val_perc": 0,
   "no_cl": false,
   "linear_eval": false,
-  "load_pretrained": "/ddnbig/a.cossu/vision/vit_cl/model{}.pt"
+  "load_pretrained": "/ddnbig/a.anonymuser/vision/vit_cl/model{}.pt"
 }

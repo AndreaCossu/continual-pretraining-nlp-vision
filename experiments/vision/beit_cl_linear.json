@@ -1,5 +1,5 @@
 {
-  "result_folder": "/ddnbig/a.cossu/vision/linear/beit_cl_linear",
+  "result_folder": "/ddnbig/a.anonymuser/vision/linear/beit_cl_linear",
   "train_batch_size": 128,
   "eval_batch_size": 128,
   "lr": 0.0001,
@@ -12,5 +12,5 @@
   "large": false,
   "no_cl": false,
   "linear_eval": true,
-  "load_pretrained": "/ddnbig/a.cossu/vision/beit_cl/beit_{}"
+  "load_pretrained": "/ddnbig/a.anonymuser/vision/beit_cl/beit_{}"
 }

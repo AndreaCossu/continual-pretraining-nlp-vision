@@ -1,5 +1,5 @@
 {
-  "result_folder": "/ddnbig/a.cossu/vision/linear/resnet_joint_linear4",
+  "result_folder": "/ddnbig/a.anonymuser/vision/linear/resnet_joint_linear4",
   "modelname": "resnet",
   "train_batch_size": 64,
   "eval_batch_size": 64,

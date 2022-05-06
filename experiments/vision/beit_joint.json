@@ -1,5 +1,5 @@
 {
-  "result_folder": "/ddnbig/a.cossu/vision/beit_joint2",
+  "result_folder": "/ddnbig/a.anonymuser/vision/beit_joint2",
   "train_batch_size": 128,
   "eval_batch_size": 128,
   "lr": 0.0001,
