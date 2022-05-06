@@ -602,11 +602,18 @@ def split_inaturalist(dataset, transforms_dict, test_size=0.25, target_type="sup
         dts = AvalancheDataset(dataset=CustomExpDataTargets(images, targets), task_labels=0,
                                dataset_type=AvalancheDatasetType.CLASSIFICATION,
                                transform=None)
-
     else:
-        with open(os.path.join(base_data, 'data', 'inaturalist_targets.pickle'), 'rb') as f:
-            targets = pickle.load(f)
-        # targets = [el[1] for el in dataset]
+        try:
+            with open(os.path.join(base_data, 'data', 'inaturalist_targets.pickle'), 'rb') as f:
+                targets = pickle.load(f)
+        except FileNotFoundError:
+            print("Inaturalist targets not found. Creating them now.")
+            targets = []
+            for cat_id, fname in dataset.index:
+                targets.append(dataset.categories_map[cat_id][target_type])
+            with open(os.path.join(base_data, 'data', 'inaturalist_targets.pickle'), 'wb') as f:
+                pickle.dump(targets, f)
+
         dts = AvalancheDataset(dataset, task_labels=0, targets=targets,
                                dataset_type=AvalancheDatasetType.CLASSIFICATION)
 

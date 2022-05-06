@@ -1,0 +1,17 @@
+{
+  "result_folder": "/ddnbig/a.cossu/vision/linear/vit_joint",
+  "modelname": "vit",
+  "train_batch_size": 64,
+  "eval_batch_size": 64,
+  "lr": 0.0001,
+  "epochs": 15,
+  "joint_epochs": 10,
+  "joint_lr": 0.0001,
+  "joint_batch_size": 64,
+  "joint_decay": 0,
+  "val_perc": 0,
+  "large": false,
+  "no_cl": true,
+  "linear_eval": true,
+  "load_pretrained": ""
+}

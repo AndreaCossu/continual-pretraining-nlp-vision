@@ -1,0 +1,15 @@
+{
+  "result_folder": "/ddnbig/a.cossu/vision/beit_joint2",
+  "train_batch_size": 128,
+  "eval_batch_size": 128,
+  "lr": 0.0001,
+  "epochs": 10,
+  "joint_epochs": 20,
+  "joint_lr": 1e-05,
+  "joint_batch_size": 128,
+  "joint_decay": 0,
+  "val_perc": 0,
+  "no_cl": true,
+  "linear_eval": false,
+  "load_pretrained": ""
+}

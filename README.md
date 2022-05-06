@@ -11,7 +11,10 @@ NeurIPS 2022: code to reproduce experiments from the continual pretraining paper
 We provide an environment file `env.yml` with which you can build the conda environment we used in the paper.
 
 ## NLP environment
-[Download](https://drive.google.com/drive/folders/1Kcy73XHkUCLt3_xb7fl1barw4xeAc5pH?usp=sharing) the preprocessed version of the NLP benchmarks. This includes tokenized datasets in different versions: for Bert, Roberta and Roberta with expanding vocabulary. In the latter case, you can find one tokenized version of each dataset per experience. 
+[Download](https://drive.google.com/file/d/18gGyDFJuYkrePX8GOvK3nkqeaI6YWK23/view?usp=sharing) the preprocessed version of the NLP benchmarks.
+The total size after unpacking should be around `21GB`.
+This includes tokenized datasets in different versions: for Bert, Roberta and Roberta with expanding vocabulary. 
+In the latter case, you can find one tokenized version of each dataset per experience. 
 Put the downloaded file under the same directory. Specify these paths in the `utils.py`.
 
 When pretraining or finetuning the original pretrained model, you can pass the Huggingface modelname (e.g., `roberta-base`) to the `modelname` parameter of each script. When finetuning the pretrained model, you should pass
@@ -23,7 +26,7 @@ The script `continual-pretraining-nlp.py` applies continual pretraining/downstre
 
 ### SentEval experiments
 Clone the [official SentEval repository](https://github.com/facebookresearch/SentEval) and put it in the main project directory under the name `SentEval`.  
-Run the `senteval.py` script. The script help provides a description of the input parameters.
+Run the `senteval.py` script.
 
 ### Build NLP benchmarks from original data
 If you do not want to use the version of the dataset we prepared, you can also start from the original data and preprocess them.
@@ -44,7 +47,9 @@ The script `continual-pretraining-cv-supervised.py` performs continual pretraini
 The script `continual-pretraining-cv-unsupervised.py` performs continual pretraining with unsupervised masked image modelling protocol.
 
 ## CKA analysis
-The `cka.py` script produces the CKA plots representing similarity across each model layer. The script compares the original pretrained model with the continuously pretrained model.
+The `cka.py` script produces the CKA plots representing similarity across each model layer. 
+The script compares the original pretrained model with the continuously pretrained model.
+We used the default hyperparameters of the script.
 
 ## Traditional continual learning scenario for NLP environment
 We provide a script (`traditional_cl_nlp.py`) to run the NLP experiments in the traditional continual learning scenario (no continual pretraining), where a model is continuoulsy finetuned on the scientific abstracts dataset.
@@ -61,8 +66,9 @@ All the custom Avalanche strategies (e.g., used to adapt Huggingface for Avalanc
 For iNaturalist, we provide the indices of the few patterns we removed because they did not match the default image format of the dataset.
 
 ## Reproducing experiments
-The folder `experiments` provides files showing the hyperparameter configurations used in our experiments. You can reproduce 
+The folder `experiments/vision` provides files showing the hyperparameter configurations used in our experiments. You can reproduce 
 results by running the main script of the experiment you want with the corresponding hyperparameters values.
+For NLP experiments hyperparameters are described in the README of the corresponding folder `experiments/nlp`.
 
 ## Jupyter notebook
 We provide a Jupyter notebook to replicate our exploratory analysis of the NLP environment, including the analysis on the number of

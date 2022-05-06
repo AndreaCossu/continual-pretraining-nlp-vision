@@ -1,0 +1,17 @@
+{
+  "result_folder": "/ddnbig/a.cossu/vision/linear/vit_cl_linear2",
+  "modelname": "vit",
+  "train_batch_size": 64,
+  "eval_batch_size": 64,
+  "lr": 0.0001,
+  "epochs": 15,
+  "joint_epochs": 20,
+  "joint_lr": 0.0001,
+  "joint_batch_size": 128,
+  "joint_decay": 0,
+  "val_perc": 0,
+  "large": false,
+  "no_cl": false,
+  "linear_eval": true,
+  "load_pretrained": "/ddnbig/a.cossu/vision/vit_cl_group/vit_cl/model{}.pt"
+}
