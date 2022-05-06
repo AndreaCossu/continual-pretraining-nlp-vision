@@ -8,8 +8,11 @@ NeurIPS 2022: code to reproduce experiments from the continual pretraining paper
 * We rely on [`torch_cka`](https://pypi.org/project/torch-cka/) package to compute CKA
 * Specify data paths in `utils.py` file. This is used to locate data across all experiments.
 
+We provide an environment file `env.yml` with which you can build the conda environment we used in the paper.
+
 ## NLP environment
-[Download](https://drive.google.com/drive/folders/1Kcy73XHkUCLt3_xb7fl1barw4xeAc5pH?usp=sharing) the preprocessed version of the NLP benchmarks. This includes tokenized datasets in different versions: for Bert, Roberta and Roberta with expanding vocabulary. In the latter case, you can find one tokenized version of each dataset per experience. Put the downloaded file under the same directory and specify the path to Huggingface when building the benchmarks.
+[Download](https://drive.google.com/drive/folders/1Kcy73XHkUCLt3_xb7fl1barw4xeAc5pH?usp=sharing) the preprocessed version of the NLP benchmarks. This includes tokenized datasets in different versions: for Bert, Roberta and Roberta with expanding vocabulary. In the latter case, you can find one tokenized version of each dataset per experience. 
+Put the downloaded file under the same directory. Specify these paths in the `utils.py`.
 
 When pretraining or finetuning the original pretrained model, you can pass the Huggingface modelname (e.g., `roberta-base`) to the `modelname` parameter of each script. When finetuning the pretrained model, you should pass
 the path to the folder where the pretrained model has been saved after pretraining.
@@ -57,7 +60,12 @@ All the custom Avalanche strategies (e.g., used to adapt Huggingface for Avalanc
 
 For iNaturalist, we provide the indices of the few patterns we removed because they did not match the default image format of the dataset.
 
+## Reproducing experiments
+The folder `experiments` provides files showing the hyperparameter configurations used in our experiments. You can reproduce 
+results by running the main script of the experiment you want with the corresponding hyperparameters values.
+
 ## Jupyter notebook
 We provide a Jupyter notebook to replicate our exploratory analysis of the NLP environment, including the analysis on the number of
 abstracts per class and the most frequent tokens present in the dataset with respect to Roberta tokenizer. 
 In particular, we used this last information to select which tokens to add to Roberta when its vocabulary was expanding. 
+The Jupyter notebook is provided *as is*, since we used it for data exploration and not for the actual execution of experiments.
