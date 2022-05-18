@@ -1,5 +1,5 @@
 {
-  "result_folder": "/ddnbig/a.anonymuser/vision/beit_cl",
+  "result_folder": "/your_disk/a.your_username/vision/beit_cl",
   "train_batch_size": 128,
   "eval_batch_size": 128,
   "lr": 0.0001,

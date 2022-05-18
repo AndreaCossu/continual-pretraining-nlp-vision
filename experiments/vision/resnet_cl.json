@@ -1,5 +1,5 @@
 {
-  "result_folder": "/ddnbig/a.anonymuser/vision/resnet_cl_group/resnet_cl4",
+  "result_folder": "/your_disk/a.your_username/vision/resnet_cl_group/resnet_cl4",
   "modelname": "resnet",
   "train_batch_size": 64,
   "eval_batch_size": 64,
@@ -13,5 +13,5 @@
   "large": false,
   "no_cl": false,
   "linear_eval": false,
-  "load_pretrained": "/ddnbig/a.anonymuser/vision/resnet_cl_group/resnet_cl/model{}.pt"
+  "load_pretrained": "/your_disk/a.your_username/vision/resnet_cl_group/resnet_cl/model{}.pt"
 }

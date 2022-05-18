@@ -1,5 +1,5 @@
 {
-  "result_folder": "/ddnbig/a.anonymuser/vision/linear/vit_cl_linear2",
+  "result_folder": "/your_disk/a.your_username/vision/linear/vit_cl_linear2",
   "modelname": "vit",
   "train_batch_size": 64,
   "eval_batch_size": 64,
@@ -13,5 +13,5 @@
   "large": false,
   "no_cl": false,
   "linear_eval": true,
-  "load_pretrained": "/ddnbig/a.anonymuser/vision/vit_cl_group/vit_cl/model{}.pt"
+  "load_pretrained": "/your_disk/a.your_username/vision/vit_cl_group/vit_cl/model{}.pt"
 }

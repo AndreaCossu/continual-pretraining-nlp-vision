@@ -3,7 +3,7 @@ from datasets import Dataset, load_dataset
 from utils import filter_by_classes, filtered_classes, create_tokenizer_cl
 
 ### SPECIFY YOUR PARAMETERS HERE ###
-base_data = '/disk3/anonymuser'
+base_data = '/disk3/your_username'
 root_path = os.path.join(base_data, 'arxiv_archive-master/processed_data/20200101/per_year')
 save_path = os.path.join(base_data, 'arxiv_archive-master/saved')
 save_path_generic = os.path.join(base_data, 'emotion')

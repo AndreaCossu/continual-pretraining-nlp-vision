@@ -50,8 +50,8 @@ inaturalist_transforms = {'train': ClassificationPresetTrain(crop_size=input_siz
 core_transforms = {'train': ClassificationPresetTrain(crop_size=input_size, vit=vit),
                    'val': ClassificationPresetEval(crop_size=input_size, resize_size=256, vit=vit)}
 
-cache_dir = '/ddnbig/a.anonymuser/vision'
-data_dir = '/ddnbig/a.anonymuser/data/'
+cache_dir = '/your_disk/a.your_username/vision'
+data_dir = '/your_disk/a.your_username/data/'
 
 os.makedirs(os.path.join(cache_dir, args.result_folder, 'joint'), exist_ok=True)
 n_exps = 5

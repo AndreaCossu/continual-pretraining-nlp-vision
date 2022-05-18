@@ -1,5 +1,5 @@
 {
-  "result_folder": "/ddnbig/a.anonymuser/vision/resnet_joint3",
+  "result_folder": "/your_disk/a.your_username/vision/resnet_joint3",
   "modelname": "resnet",
   "train_batch_size": 128,
   "eval_batch_size": 128,

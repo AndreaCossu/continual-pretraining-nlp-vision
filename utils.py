@@ -27,8 +27,8 @@ from torchvision import transforms
 from dall_e import load_model
 from dall_e.utils import map_pixels
 
-base_data = '/ddnbig/a.anonymuser'
-base_save = '/ddnbig/a.anonymuser'
+base_data = '/your_disk/a.your_username'
+base_save = '/your_disk/a.your_username'
 
 
 root_path = os.path.join(base_data, 'arxiv_archive-master/processed_data/20200101/per_year')
