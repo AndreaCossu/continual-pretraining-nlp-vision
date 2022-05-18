@@ -1,5 +1,4 @@
 # Continual Pretraining
-NeurIPS 2022: code to reproduce experiments from the continual pretraining paper
 
 ## Prerequisites
 * Install PyTorch (GPU support strongly recommended)
