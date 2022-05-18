@@ -1,4 +1,4 @@
-# Continual Pretraining
+# Continual Pre-Training Mitigates Forgetting in Language and Vision
 
 ## Prerequisites
 * Install PyTorch (GPU support strongly recommended)
