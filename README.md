@@ -1,5 +1,7 @@
 # Continual Pre-Training Mitigates Forgetting in Language and Vision
 
+https://arxiv.org/abs/2205.09357
+
 ## Prerequisites
 * Install PyTorch (GPU support strongly recommended)
 * Install [Avalanche library](https://github.com/ContinualAI/avalanche/) for continual learning with `pip install avalanche-lib`. Check that version is 0.1.0 (beta). 
