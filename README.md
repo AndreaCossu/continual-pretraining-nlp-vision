@@ -74,3 +74,14 @@ We provide a Jupyter notebook to replicate our exploratory analysis of the NLP e
 abstracts per class and the most frequent tokens present in the dataset with respect to Roberta tokenizer. 
 In particular, we used this last information to select which tokens to add to Roberta when its vocabulary was expanding. 
 The Jupyter notebook is provided *as is*, since we used it for data exploration and not for the actual execution of experiments.
+
+## How to cite the paper
+
+```
+@article{cossu2022a,
+  title = {Continual {{Pre-Training Mitigates Forgetting}} in {{Language}} and {{Vision}}},
+  author = {Cossu, Andrea and Tuytelaars, Tinne and Carta, Antonio and Passaro, Lucia and Lomonaco, Vincenzo and Bacciu, Davide},
+  year = {2022},
+  url = {https://arxiv.org/abs/2205.09357v1}
+}
+```
