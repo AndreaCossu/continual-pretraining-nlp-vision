@@ -5,7 +5,6 @@ import math
 import pickle
 import json
 import avalanche as avl
-import transformers
 from PIL import Image
 from avalanche.benchmarks.utils.dataset_definitions import IDatasetWithTargets
 from avalanche.benchmarks.datasets import default_dataset_location
@@ -16,8 +15,8 @@ import torch
 from avalanche.benchmarks.utils.data_loader import TaskBalancedDataLoader
 from avalanche.benchmarks.utils.dataset_utils import TupleTLabel
 from torchvision.transforms import InterpolationMode, autoaugment
-from transformers.models.roberta.modeling_roberta import RobertaClassificationHead
 from transformers.trainer import Trainer
+from tqdm import tqdm
 from pandas import read_csv, concat
 from sklearn.model_selection import train_test_split
 from datasets import Features, Value, ClassLabel, Dataset, Split, load_metric, concatenate_datasets
@@ -27,8 +26,8 @@ from torchvision import transforms
 from dall_e import load_model
 from dall_e.utils import map_pixels
 
-base_data = '/your_disk/a.your_username'
-base_save = '/your_disk/a.your_username'
+base_data = '/disk3/cossu'
+base_save = '/disk2/cossu'
 
 
 root_path = os.path.join(base_data, 'arxiv_archive-master/processed_data/20200101/per_year')
@@ -1085,3 +1084,24 @@ class CustomRobertaClassificationHead(torch.nn.Module):
         x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
         x = self.out_proj(x)
         return x
+
+
+@torch.no_grad()
+def select_informative_examples(trd, model, device, n_samples=2000):
+    """Given a training set from Huggingface datasets, compute the loss
+    of the model on each example from the training set. Returns a new Huggingface
+    dataset containing the 10 examples with the largest loss.
+    """
+
+    losses = []
+    for i in tqdm(range(len(trd))):
+        example = trd[i]
+        input_ids = example['input_ids'].unsqueeze(0).to(device)
+        attention_mask = example['attention_mask'].unsqueeze(0).to(device)
+        labels = example['input_ids'].unsqueeze(0).to(device)
+        outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
+        loss = outputs.loss.cpu().item()
+        losses.append(loss)
+    top_indices = torch.topk(torch.tensor(losses), k=n_samples).indices.tolist()
+    return trd.filter(lambda el, i: i in top_indices, with_indices=True)
+
