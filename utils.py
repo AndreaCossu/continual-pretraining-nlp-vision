@@ -1086,12 +1086,35 @@ class CustomRobertaClassificationHead(torch.nn.Module):
         return x
 
 
+def get_filter_indices(values, k, mode='top'):
+    """
+    mode: 'top': selects indices of top-k values, 'bottom' selects indices of smallest-k values,
+        'median' selects k indices around median value
+    """
+    if mode == 'median':
+        sorted_indices = np.argsort(values)
+        median_index = sorted_indices[len(sorted_indices) // 2]
+        start = median_index - (k // 2)
+        end = median_index + (k // 2)
+        indices = sorted_indices[start:end].tolist()
+    elif mode == 'top':
+        indices = torch.topk(torch.tensor(values), k=k).indices.tolist()
+    elif mode == 'bottom':
+        indices = torch.topk(-torch.tensor(values), k=k).indices.tolist()
+    return indices
+
 @torch.no_grad()
-def select_informative_examples(trd, model, device, n_samples=2000):
+def select_informative_examples(trd, model, device, n_samples=2000, mode='top'):
     """Given a training set from Huggingface datasets, compute the loss
     of the model on each example from the training set. Returns a new Huggingface
-    dataset containing the 10 examples with the largest loss.
+    dataset containing examples selected via the mode parameter based on the loss values.
     """
+
+    if mode == 'random':
+        rand_indices = list(range(len(trd)))
+        random.shuffle(rand_indices)
+        rand_indices = rand_indices[:n_samples]
+        return trd.filter(lambda el, i: i in rand_indices, with_indices=True)
 
     losses = []
     for i in tqdm(range(len(trd))):
@@ -1102,6 +1125,8 @@ def select_informative_examples(trd, model, device, n_samples=2000):
         outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
         loss = outputs.loss.cpu().item()
         losses.append(loss)
-    top_indices = torch.topk(torch.tensor(losses), k=n_samples).indices.tolist()
-    return trd.filter(lambda el, i: i in top_indices, with_indices=True)
+
+    indices = get_filter_indices(losses, n_samples, mode=mode)
+
+    return trd.filter(lambda el, i: i in indices, with_indices=True)
 

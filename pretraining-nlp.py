@@ -17,9 +17,9 @@ parser.add_argument('--tokenizername', type=str, default='', help='if empty, equ
 parser.add_argument('--modelname', type=str, default='roberta-base', help='huggingface model name or path to pretrained model folder'
                                                                              'to use it for finetuning')
 
-parser.add_argument('--select_informative_examples', action="store_true", help='use only informative examples for pretraining.')
+parser.add_argument('--pretrain_selection', type=str, default='none', choices=['none', 'random', 'top', 'bottom', 'median'],
+                    help='during pretrain, select a subset of the examples according to the loss value.')
 parser.add_argument('--num_informative_examples', type=int, default=10000, help='Number of informative examples to select per experience.')
-parser.add_argument('--select_random_examples', action="store_true", help='use only randomly selected examples for pretraining.')
 
 parser.add_argument('--result_folder', type=str, help='folder in which to save models, appended to cache folder')
 
@@ -79,18 +79,14 @@ if args.task_type == 'pretrain':
     tr_d.set_format(type="torch")
     ts_d.set_format(type="torch")
 
-    if args.select_informative_examples:
+    if args.pretrain_selection != 'none':
         assert len(tr_d) >= args.num_informative_examples
         device = 'cpu' if args.no_cuda else 'cuda'
         print('Selecting informative examples...')
-        tr_d = select_informative_examples(tr_d, model.to(device), device, n_samples=args.num_informative_examples)
+        tr_d = select_informative_examples(tr_d, model.to(device), device, n_samples=args.num_informative_examples,
+                                           mode=args.pretrain_selection)
         print('Done.')
         assert len(tr_d) == args.num_informative_examples
-    elif args.select_random_examples:
-        rand_indices = list(range(len(tr_d)))
-        random.shuffle(rand_indices)
-        rand_indices = rand_indices[:args.num_informative_examples]
-        tr_d = tr_d.filter(lambda el, i: i in rand_indices, with_indices=True)
 
     with wandb.init(project=project_name, name=args.result_folder):
         pretrain_model(args=args, tr_d=tr_d, ts_d=ts_d, model=model, tokenizer=tokenizer, log_strategy=log_strategy,
