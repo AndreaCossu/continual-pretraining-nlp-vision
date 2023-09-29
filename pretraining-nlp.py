@@ -7,7 +7,7 @@ from transformers import AutoModelForSequenceClassification, AutoModelForMaskedL
 from datasets import Dataset
 from utils import filtered_classes, cache_dir, save_path_small, \
     pretrain_model, finetune_model, create_tokenizer, remap_classes, select_informative_examples, \
-    freeze_model_but_classifier, CustomRobertaClassificationHead
+    freeze_model_but_classifier, CustomRobertaClassificationHead, freeze_half_model
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--log_every', type=int, default=0, help='Step every which log, 0 to log every epoch, -1 to disable')
@@ -30,6 +30,8 @@ parser.add_argument('--add_tokens', action="store_true", help='add domain-specif
 
 parser.add_argument('--no_save', action="store_true", help='do not save final model')
 parser.add_argument('--only_eval', action="store_true", help='only perform a round of evaluation')
+
+parser.add_argument('--freeze_half_model', action="store_true", help='freeze first half of layers during pretraining')
 
 parser.add_argument('--task_type', type=str, default='pretrain', choices=['pretrain', 'finetune'], help='type of task to perform')
 parser.add_argument('--train_batch_size', type=int, default=25, help='training batch size')
@@ -87,6 +89,8 @@ if args.task_type == 'pretrain':
                                            mode=args.pretrain_selection)
         print('Done.')
         assert len(tr_d) == args.num_informative_examples
+
+    freeze_half_model(model, args.freeze_half_model, bert=use_bert)
 
     with wandb.init(project=project_name, name=args.result_folder):
         pretrain_model(args=args, tr_d=tr_d, ts_d=ts_d, model=model, tokenizer=tokenizer, log_strategy=log_strategy,

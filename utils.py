@@ -865,6 +865,23 @@ class MaskingGenerator:
         return mask
 
 
+def freeze_half_model(model, freeze, bert=False):
+    if not freeze:
+        return
+
+    modelname = 'bert' if bert else 'roberta'
+    base_model = getattr(model, modelname)
+
+    total_layers = len(base_model.encoder.layer)
+    layers_to_freeze = total_layers // 2
+
+    for p in base_model.embeddings.parameters():
+        p.requires_grad_(False)
+
+    for p in base_model.encoder.layer[:layers_to_freeze].parameters():
+        p.requires_grad_(False)
+
+
 def freeze_model_but_classifier(model, linear_eval, head_name):
     if not isinstance(head_name, (list, tuple)):
         head_name = [head_name]
