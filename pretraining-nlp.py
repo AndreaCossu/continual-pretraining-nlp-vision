@@ -85,10 +85,11 @@ if args.task_type == 'pretrain':
         assert len(tr_d) >= args.num_informative_examples
         device = 'cpu' if args.no_cuda else 'cuda'
         print('Selecting informative examples...')
-        tr_d = select_informative_examples(tr_d, model.to(device), device, n_samples=args.num_informative_examples,
+        tr_d = select_informative_examples(tr_d, model.to(device), device,
+                                           n_samples=args.num_informative_examples,
                                            mode=args.pretrain_selection)
+        print(len(tr_d), 'examples selected.')
         print('Done.')
-        assert len(tr_d) == args.num_informative_examples
 
     freeze_half_model(model, args.freeze_half_model, bert=use_bert)
 

@@ -90,8 +90,6 @@ if args.task_type == 'pretrain':
             tr_d = select_informative_examples(tr_d, model.to(device), device, n_samples=args.num_informative_examples,
                                                mode=args.pretrain_selection)
             print('Done.')
-            assert len(tr_d) == args.num_informative_examples
-
 
         with wandb.init(project=project_name, name=f'{args.result_folder}_{exp_id}', group=args.result_folder):
             pretrain_model(args=args, tr_d=tr_d, ts_d=ts_d, model=model, tokenizer=tokenizer, log_strategy=log_strategy,

@@ -1110,7 +1110,7 @@ def get_filter_indices(values, k, mode='top'):
     """
     if mode == 'median':
         sorted_indices = np.argsort(values)
-        median_index = sorted_indices[len(sorted_indices) // 2]
+        median_index = len(sorted_indices) // 2
         start = median_index - (k // 2)
         end = median_index + (k // 2)
         indices = sorted_indices[start:end].tolist()
@@ -1142,7 +1142,6 @@ def select_informative_examples(trd, model, device, n_samples=2000, mode='top'):
         outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
         loss = outputs.loss.cpu().item()
         losses.append(loss)
-
     indices = get_filter_indices(losses, n_samples, mode=mode)
 
     return trd.filter(lambda el, i: i in indices, with_indices=True)
